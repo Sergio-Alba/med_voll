@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.domain.direccion.Direccion;
-import med.voll.api.domain.medico.DatosDeRegistroMedico;
 
 @Table(name="pacientes")
 @Entity(name = "Paciente")
@@ -23,32 +22,32 @@ public class Paciente {
     private String email;
     private String telefono;
     private String documento;
-    private Boolean activo;
     @Embedded
     private Direccion direccion;
+    private Boolean activo;
 
     public Paciente(DatosRegistroPaciente d) {
+        this.activo = true;
         this.nombre = d.nombre();
         this.email = d.email();
         this.telefono = d.telefono();
         this.documento = d.documento();
-        this.activo = true;
         this.direccion = new Direccion(d.direccion());
     }
 
-    public void actualizarDatosPaciente(DatosActualizarPaciente datosActualizarPaciente) {
-        if (datosActualizarPaciente.nombre() != null){
-            this.nombre = datosActualizarPaciente.nombre();
+    public void actualizarDatosPaciente(DatosActualizarPaciente datos) {
+        if (datos.nombre() != null){
+            this.nombre = datos.nombre();
         }
-        if (datosActualizarPaciente.documento() !=null){
-            this.documento = datosActualizarPaciente.documento();
+        if (datos.telefono() !=null){
+            this.documento = datos.telefono();
         }
-        if (datosActualizarPaciente.direccion() != null){
-            this.direccion = direccion.actualizarDireccion(datosActualizarPaciente.direccion());
+        if (datos.direccion() != null){
+            this.direccion.actualizarDireccion(datos.direccion());
         }
     }
 
-    public void desactivarMedico() {
+    public void eliminar() {
         this.activo = false;
     }
 }

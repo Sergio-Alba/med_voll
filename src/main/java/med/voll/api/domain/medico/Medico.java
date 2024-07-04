@@ -28,11 +28,11 @@ public class Medico {
     private Direccion direccion;
 
     public Medico(DatosDeRegistroMedico d) {
+        this.activo = true;
         this.nombre = d.nombre();
         this.email = d.email();
         this.telefono = d.telefono();
         this.documento = d.documento();
-        this.activo = true;
         this.especialidad = d.especialidad();
         this.direccion = new Direccion(d.direccion());
     }
@@ -45,7 +45,7 @@ public class Medico {
             this.documento = datosActualizarMedico.documento();
         }
         if (datosActualizarMedico.direccion() != null){
-            this.direccion = direccion.actualizarDireccion(datosActualizarMedico.direccion());
+            this.direccion.actualizarDireccion(datosActualizarMedico.direccion());
         }
     }
 

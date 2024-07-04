@@ -17,11 +17,13 @@ import java.net.URI;
 @RestController
 @RequestMapping("/medicos")
 public class MedicoController {
+
     @Autowired
     private MedicoRepository medicoRepository;
 
     // Post para enviar datos a la base de datos
     @PostMapping
+    @Transactional
     public ResponseEntity<DatosRespuestaMedico> registrarMedico(@RequestBody @Valid DatosDeRegistroMedico datosDeRegistroMedico,
                                                                 UriComponentsBuilder uriComponentsBuilder){
         Medico medico =  medicoRepository.save(new Medico(datosDeRegistroMedico));
@@ -47,7 +49,8 @@ public class MedicoController {
         return ResponseEntity.ok(new DatosRespuestaMedico(medico.getId(), medico.getNombre(),
                 medico.getEmail(), medico.getTelefono(), medico.getEspecialidad().toString(),
                 new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(),
-                        medico.getDireccion().getCiudad(),medico.getDireccion().getNumero(),medico.getDireccion().getComplemento())));
+                        medico.getDireccion().getCiudad(),medico.getDireccion().getNumero(),
+                        medico.getDireccion().getComplemento())));
     }
     // DELETE LOGICO
     @DeleteMapping("/{id}")
@@ -65,7 +68,8 @@ public class MedicoController {
         var datosMedicos = new DatosRespuestaMedico(medico.getId(), medico.getNombre(),
                 medico.getEmail(), medico.getTelefono(), medico.getEspecialidad().toString(),
                 new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(),
-                        medico.getDireccion().getCiudad(),medico.getDireccion().getNumero(),medico.getDireccion().getComplemento()));
+                        medico.getDireccion().getCiudad(),medico.getDireccion().getNumero(),
+                        medico.getDireccion().getComplemento()));
         return ResponseEntity.ok(datosMedicos);
     }
 }
