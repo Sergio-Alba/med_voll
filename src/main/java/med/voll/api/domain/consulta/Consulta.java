@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.paciente.Paciente;
+import org.hibernate.annotations.CollectionId;
 
 import java.time.LocalDateTime;
 
@@ -32,6 +33,19 @@ public class Consulta {
 
     private LocalDateTime fecha;
 
+    @Column(name = "activo_cancelado")
+    @Enumerated(EnumType.STRING)
+    private MotivoCanselamiento motivoCanselamiento;
+
+
+    public Consulta(Medico m, Paciente p, LocalDateTime fecha){
+        this.medico = m;
+        this.paciente = p;
+        this.fecha = fecha;
+    }
+    public void cancelar(MotivoCanselamiento motivo){
+        this.motivoCanselamiento = motivo;
+    }
 }
 
 
