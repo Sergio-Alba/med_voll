@@ -29,6 +29,7 @@ public class ConsultaController {
 
         return ResponseEntity.ok(response);
     }
+
     @DeleteMapping
     @Transactional
     public ResponseEntity cancelar(@RequestBody @Valid DatosCancelamientoConsulta datos){
