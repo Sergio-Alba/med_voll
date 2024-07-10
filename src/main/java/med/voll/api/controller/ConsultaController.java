@@ -36,12 +36,6 @@ public class ConsultaController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping
-    @Transactional
-    public ResponseEntity cancelar(@RequestBody @Valid DatosCancelamientoConsulta datos){
-        service.cancelar(datos);
-        return ResponseEntity.noContent().build();
-    }
 
 }
 
